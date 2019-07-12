@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29020.237
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iTechArt.TicTacToe", "iTechArt.TicTacToe\iTechArt.TicTacToe.csproj", "{5B1EF466-38BC-4DD9-926D-301DEC140436}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D15558C1-0000-4C4C-9D87-FDD6615A976F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iTechArt.TicTacToe.Foundation", "TicTacToe.Foundation\iTechArt.TicTacToe.Foundation\iTechArt.TicTacToe.Foundation.csproj", "{66864C87-6833-4E11-AC02-8AE46BEDC999}"
 EndProject
 Global
@@ -26,10 +24,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{5B1EF466-38BC-4DD9-926D-301DEC140436} = {D15558C1-0000-4C4C-9D87-FDD6615A976F}
-		{66864C87-6833-4E11-AC02-8AE46BEDC999} = {D15558C1-0000-4C4C-9D87-FDD6615A976F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A14DFB11-A67C-4225-BC7D-4E4B1B8C3811}
