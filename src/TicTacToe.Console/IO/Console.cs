@@ -1,6 +1,6 @@
 ﻿using TicTacToe.Console.Interfaces;
 
-namespace TicTacToe.Console.Input
+namespace TicTacToe.Console.IO
 {
     public class Console : IConsole
     {

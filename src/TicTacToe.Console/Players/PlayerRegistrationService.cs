@@ -49,7 +49,7 @@ namespace TicTacToe.Console.Players
             else
             {
                 _console.WriteLine("Available figures:");
-                availableFigureTypes.ForEach(figure => _console.WriteLine($"{availableFigureTypes.IndexOf(figure)+1}. {figure}"));
+                availableFigureTypes.ForEach(figure => _console.WriteLine($"{availableFigureTypes.IndexOf(figure) + 1}. {figure}"));
                 do
                 {
                     chosenFigureNumber = _consoleInput.GetInt("Please, enter figure's number:");
