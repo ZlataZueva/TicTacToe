@@ -30,6 +30,7 @@ namespace TicTacToe.Console.Players
             var lastName = GetName();
             var figureType = ChooseFigure();
             var player = _playerFactory.CreatePlayer(firstName, lastName, figureType);
+            _availableFigureTypes.Remove(figureType);
             ShowMessage($"Registered player: {firstName} {lastName} with figure - {figureType}.");
 
             return player;
@@ -42,28 +43,27 @@ namespace TicTacToe.Console.Players
             {
                 throw new ArgumentException("No more figures left");
             }
-            int figureNumber;
+            int chosenFigureNumber;
             if (_availableFigureTypes.Count == 1)
             {
-                figureNumber = 1;
+                chosenFigureNumber = 1;
             }
             else
             {
                 do
                 {
-                    ShowMessage("Please, choose one of available figures:");
+                    ShowMessage("Please, choose one of the figures:");
+                    var counter = 1;
                     foreach (var figure in _availableFigureTypes)
                     {
-                        ShowMessage($"{_availableFigureTypes.IndexOf(figure) + 1}. {figure}");
+                        ShowMessage($"{counter++}. {figure}");
                     }
-                    ShowMessage("Enter number of the figure:");
-                } while (!(int.TryParse(GetInput(), out figureNumber) &&
-                           figureNumber > 0 && figureNumber <= _availableFigureTypes.Count));
+                    ShowMessage("Enter figure's number:");
+                } while (!(int.TryParse(GetInput(), out chosenFigureNumber) &&
+                           chosenFigureNumber > 0 && chosenFigureNumber <= _availableFigureTypes.Count));
             }
-            var figureType = _availableFigureTypes[figureNumber - 1];
-            _availableFigureTypes.RemoveAt(figureNumber - 1);
 
-            return figureType;
+            return _availableFigureTypes[chosenFigureNumber - 1];
         }
 
         private static string GetName()
@@ -76,11 +76,11 @@ namespace TicTacToe.Console.Players
                 {
                     ShowMessage("Name should not be empty");
                 }
-                if (name != null && name.ToCharArray().Any(char.IsDigit))
+                if (name == null || name.ToCharArray().All(char.IsLetter))
                 {
-                    ShowMessage("Name should not contain digits");
+                    ShowMessage("Name should contain letters only");
                 }
-            } while (string.IsNullOrEmpty(name) || name.ToCharArray().Any(char.IsDigit));
+            } while (string.IsNullOrEmpty(name) || !name.ToCharArray().All(char.IsLetter));
 
             return name;
         }
