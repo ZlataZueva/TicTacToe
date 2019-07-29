@@ -43,6 +43,7 @@
     <Compile Include="Interfaces\IConsoleInputProvider.cs" />
     <Compile Include="Interfaces\IPlayerFactory.cs" />
     <Compile Include="Interfaces\IPlayersRegistrationService.cs" />
+    <Compile Include="IO\GameInputProvider.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Players\PlayerFactory.cs" />
     <Compile Include="Players\PlayerRegistrationService.cs" />
