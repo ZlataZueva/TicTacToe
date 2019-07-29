@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using iTechArt.TicTacToe.Foundation.Figures;
 using iTechArt.TicTacToe.Foundation.Interfaces;
+using TicTacToe.Console.Extensions;
 using TicTacToe.Console.Interfaces;
 
 namespace TicTacToe.Console.Players
@@ -41,7 +42,7 @@ namespace TicTacToe.Console.Players
 
         private FigureType ChooseFigure()
         {
-            if (_availableFigureTypes.Count == 0)
+            if (!_availableFigureTypes.Any())
             {
                 throw new ArgumentException("No more figures left");
             }
@@ -53,11 +54,7 @@ namespace TicTacToe.Console.Players
             else
             {
                 _console.WriteLine("Available figures:");
-                var counter = 1;
-                foreach (var figure in _availableFigureTypes)
-                {
-                    _console.WriteLine($"{counter++}. {figure}");
-                }
+                _availableFigureTypes.ForEach(figure => _console.WriteLine($"{_availableFigureTypes.IndexOf(figure)+1}. {figure}"));
                 do
                 {
                     chosenFigureNumber = _consoleInput.GetInt("Please, enter figure's number:");

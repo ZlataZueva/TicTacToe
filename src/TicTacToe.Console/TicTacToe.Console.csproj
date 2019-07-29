@@ -36,6 +36,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Extensions\CollectionExtension.cs" />
     <Compile Include="Input\Console.cs" />
     <Compile Include="Input\ConsoleInputProvider.cs" />
     <Compile Include="Interfaces\IConsole.cs" />
