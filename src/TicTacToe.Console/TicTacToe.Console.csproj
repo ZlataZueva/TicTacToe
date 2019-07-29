@@ -37,10 +37,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Extensions\CollectionExtension.cs" />
+    <Compile Include="GameConfiguration\GameConfigurationService.cs" />
     <Compile Include="Input\Console.cs" />
     <Compile Include="Input\ConsoleInputProvider.cs" />
     <Compile Include="Interfaces\IConsole.cs" />
     <Compile Include="Interfaces\IConsoleInputProvider.cs" />
+    <Compile Include="Interfaces\IGameConfigurationService.cs" />
     <Compile Include="Interfaces\IPlayerFactory.cs" />
     <Compile Include="Interfaces\IPlayersRegistrationService.cs" />
     <Compile Include="Players\Player.cs" />
