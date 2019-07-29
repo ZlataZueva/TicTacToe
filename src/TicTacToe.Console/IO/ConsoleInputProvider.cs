@@ -1,7 +1,7 @@
 ﻿using System;
 using TicTacToe.Console.Interfaces;
 
-namespace TicTacToe.Console.Input
+namespace TicTacToe.Console.IO
 {
     public class ConsoleInputProvider : IConsoleInputProvider
     {
