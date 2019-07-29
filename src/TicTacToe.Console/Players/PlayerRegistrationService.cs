@@ -76,11 +76,7 @@ namespace TicTacToe.Console.Players
                 {
                     ShowMessage("Name should not be empty");
                 }
-                if (name == null || name.ToCharArray().All(char.IsLetter))
-                {
-                    ShowMessage("Name should contain letters only");
-                }
-            } while (string.IsNullOrEmpty(name) || !name.ToCharArray().All(char.IsLetter));
+            } while (String.IsNullOrEmpty(name));
 
             return name;
         }
