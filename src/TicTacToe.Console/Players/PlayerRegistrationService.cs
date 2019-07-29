@@ -10,13 +10,17 @@ namespace TicTacToe.Console.Players
     public class PlayerRegistrationService : IPlayersRegistrationService
     {
         private readonly IPlayerFactory _playerFactory;
+        private readonly IConsole _console;
+        private readonly IConsoleInputProvider _consoleInput;
 
         private readonly IList<FigureType> _availableFigureTypes;
 
 
-        public PlayerRegistrationService(IPlayerFactory playerFactory)
+        public PlayerRegistrationService(IPlayerFactory playerFactory, IConsole console, IConsoleInputProvider consoleInput)
         {
             _playerFactory = playerFactory;
+            _console = console;
+            _consoleInput = consoleInput;
 
             _availableFigureTypes = Enum.GetValues(typeof(FigureType)).Cast<FigureType>().ToList();
         }
@@ -24,14 +28,12 @@ namespace TicTacToe.Console.Players
 
         public IPlayer Register()
         {
-            ShowMessage("Please, enter player's first name:");
-            var firstName = GetName();
-            ShowMessage("Please, enter player's last name:");
-            var lastName = GetName();
+            var firstName = _consoleInput.GetString("Please, enter player's first name:");
+            var lastName = _consoleInput.GetString("Please, enter player's last name:");
             var figureType = ChooseFigure();
             var player = _playerFactory.CreatePlayer(firstName, lastName, figureType);
             _availableFigureTypes.Remove(figureType);
-            ShowMessage($"Registered player: {firstName} {lastName} with figure - {figureType}.");
+            _console.WriteLine($"Registered player: {firstName} {lastName} with figure - {figureType}.");
 
             return player;
         }
@@ -50,45 +52,19 @@ namespace TicTacToe.Console.Players
             }
             else
             {
+                _console.WriteLine("Available figures:");
+                var counter = 1;
+                foreach (var figure in _availableFigureTypes)
+                {
+                    _console.WriteLine($"{counter++}. {figure}");
+                }
                 do
                 {
-                    ShowMessage("Please, choose one of the figures:");
-                    var counter = 1;
-                    foreach (var figure in _availableFigureTypes)
-                    {
-                        ShowMessage($"{counter++}. {figure}");
-                    }
-                    ShowMessage("Enter figure's number:");
-                } while (!(int.TryParse(GetInput(), out chosenFigureNumber) &&
-                           chosenFigureNumber > 0 && chosenFigureNumber <= _availableFigureTypes.Count));
+                    chosenFigureNumber = _consoleInput.GetInt("Please, enter figure's number:");
+                } while (chosenFigureNumber <= 0 || chosenFigureNumber > _availableFigureTypes.Count);
             }
 
             return _availableFigureTypes[chosenFigureNumber - 1];
-        }
-
-        private static string GetName()
-        {
-            string name;
-            do
-            {
-                name = GetInput();
-                if (name == string.Empty)
-                {
-                    ShowMessage("Name should not be empty");
-                }
-            } while (String.IsNullOrEmpty(name));
-
-            return name;
-        }
-
-        private static void ShowMessage(string message)
-        {
-            System.Console.WriteLine(message);
-        }
-
-        private static string GetInput()
-        {
-            return System.Console.ReadLine();
         }
     }
 }
