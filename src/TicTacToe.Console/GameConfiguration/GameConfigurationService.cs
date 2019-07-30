@@ -10,59 +10,90 @@ namespace TicTacToe.Console.GameConfiguration
 {
     public class GameConfigurationService : IGameConfigurationService
     {
-        private readonly IGameConfigurationFactory _configurationFactory;
-        private readonly IPlayersRegistrationService _registrationService;
+        private readonly IGameConfigurationFactory _gameConfigurationFactory;
+        private readonly IPlayersRegistrationService _playersRegistrationService;
         private readonly IConsole _console;
-        private readonly IConsoleInputProvider _consoleInput;
+        private readonly IConsoleInputProvider _consoleInputProvider;
 
-        private IList<IPlayer> _players;
+        private ICollection<IPlayer> _players;
 
 
         public GameConfigurationService(
-            IGameConfigurationFactory configurationFactory, 
-            IPlayersRegistrationService registrationService, 
+            IGameConfigurationFactory gameConfigurationFactory, 
+            IPlayersRegistrationService playersRegistrationService, 
             IConsole console, 
-            IConsoleInputProvider consoleInput)
+            IConsoleInputProvider consoleInputProvider)
         {
-            _configurationFactory = configurationFactory;
-            _registrationService = registrationService;
+            _gameConfigurationFactory = gameConfigurationFactory;
+            _playersRegistrationService = playersRegistrationService;
             _console = console;
-            _consoleInput = consoleInput;
+            _consoleInputProvider = consoleInputProvider;
         }
 
 
-        public IGameConfiguration GetGameConfiguration(GameConfigurationType type = GameConfigurationType.WithNewPlayers)
+        public IGameConfiguration PrepareGameConfiguration(GameConfigurationType type = GameConfigurationType.WithNewPlayers)
         {
             if (type == GameConfigurationType.WithNewPlayers || !_players.Any())
             {
                 _players = new List<IPlayer>();
                 var availableFigures = Enum.GetValues(typeof(FigureType)).Cast<FigureType>().ToList();
-                int playersNumber;
-                do
-                {
-                    playersNumber = _consoleInput.GetInt($"Please, enter the number of players (up to {availableFigures.Count}):");
-                } while (playersNumber <= 1 || playersNumber > availableFigures.Count);
-                for (var i = 0; i < playersNumber; i++)
-                {
-                    var player = _registrationService.Register(availableFigures);
-                    _players.Add(player);
-                    availableFigures.Remove(player.FigureType);
-                }
+                var playersNumber = GetPlayersNumber(availableFigures.Count);
+                _players = RegisterPlayers(playersNumber, availableFigures);
             }
+            var firstPlayerIndex = GetFirstPlayerIndex(_players);
+            var boardSize = GetBoardSize();
+
+            return _gameConfigurationFactory.CreateGameConfiguration(_players.ToList(), firstPlayerIndex - 1, boardSize);
+        }
+
+
+        private int GetPlayersNumber(int max)
+        {
+            int playersNumber;
+            do
+            {
+                playersNumber = _consoleInputProvider.GetInt($"Please, enter the number of players (up to {max}):");
+            } while (playersNumber <= 1 || playersNumber > max);
+
+            return playersNumber;
+        }
+
+        private ICollection<IPlayer> RegisterPlayers(int count, ICollection<FigureType> availableFigures)
+        {
+            var players = new List<IPlayer>();
+            for (var n = 0; n < count; n++)
+            {
+                var player = _playersRegistrationService.Register(availableFigures.ToList());
+                players.Add(player);
+                _console.WriteLine($"Registered player: {player.FirstName} {player.LastName} with figure - {player.FigureType}");
+                availableFigures.Remove(player.FigureType);
+            }
+
+            return players;
+        }
+
+        private int GetFirstPlayerIndex(ICollection<IPlayer> players)
+        {
             _console.WriteLine("Players:");
-            _players.ForEach(player => _console.WriteLine($"{_players.IndexOf(player) + 1}. {player.FirstName} {player.LastName}"));
+            players.ForEach((i, player) => _console.WriteLine($"{i + 1}. {player.FirstName} {player.LastName}"));
             int firstPlayerNumber;
             do
             {
-                firstPlayerNumber = _consoleInput.GetInt("Please, choose who starts the game (enter player's number):");
+                firstPlayerNumber = _consoleInputProvider.GetInt("Please, choose who starts the game (enter player's number):");
             } while (firstPlayerNumber <= 0 || firstPlayerNumber > _players.Count);
+
+            return firstPlayerNumber - 1;
+        }
+
+        private int GetBoardSize()
+        {
             int boardSize;
             do
             {
-                boardSize = _consoleInput.GetInt("Please, enter the size of the board:");
+                boardSize = _consoleInputProvider.GetInt("Please, enter the size of the board:");
             } while (boardSize <= 0);
 
-            return _configurationFactory.CreateGameConfiguration(_players.ToList(), firstPlayerNumber - 1, boardSize);
+            return boardSize;
         }
     }
 }
