@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using iTechArt.TicTacToe.Foundation.Figures;
@@ -12,49 +12,47 @@ namespace TicTacToe.Console.Players
     {
         private readonly IPlayerFactory _playerFactory;
         private readonly IConsole _console;
-        private readonly IConsoleInputProvider _consoleInput;
+        private readonly IConsoleInputProvider _consoleInputProvider;
 
 
-        public PlayerRegistrationService(IPlayerFactory playerFactory, IConsole console, IConsoleInputProvider consoleInput)
+        public PlayerRegistrationService(
+            IPlayerFactory playerFactory, 
+            IConsole console, 
+            IConsoleInputProvider consoleInputProvider)
         {
             _playerFactory = playerFactory;
             _console = console;
-            _consoleInput = consoleInput;
+            _consoleInputProvider = consoleInputProvider;
         }
 
 
-        public IPlayer Register(IList<FigureType> availableFigureTypes)
+        public IPlayer Register(IReadOnlyList<FigureType> availableFigureTypes)
         {
-            var firstName = _consoleInput.GetString("Please, enter player's first name:");
-            var lastName = _consoleInput.GetString("Please, enter player's last name:");
+            var firstName = _consoleInputProvider.GetString("Please, enter player's first name:");
+            var lastName = _consoleInputProvider.GetString("Please, enter player's last name:");
             var figureType = ChooseFigure(availableFigureTypes);
-            var player = _playerFactory.CreatePlayer(firstName, lastName, figureType);
-            _console.WriteLine($"Registered player: {firstName} {lastName} with figure - {figureType}.");
 
-            return player;
+            return _playerFactory.CreatePlayer(firstName, lastName, figureType);
         }
 
 
-        private FigureType ChooseFigure(IList<FigureType> availableFigureTypes)
+        private FigureType ChooseFigure(IReadOnlyList<FigureType> availableFigureTypes)
         {
             if (!availableFigureTypes.Any())
             {
                 throw new ArgumentException("No more figures left");
             }
-            int chosenFigureNumber;
             if (availableFigureTypes.Count == 1)
             {
-                chosenFigureNumber = 1;
+                return availableFigureTypes.Single();
             }
-            else
+            int chosenFigureNumber;
+            _console.WriteLine("Available figures:");
+            availableFigureTypes.ForEach((i, figure) => _console.WriteLine($"{i + 1}. {figure}"));
+            do
             {
-                _console.WriteLine("Available figures:");
-                availableFigureTypes.ForEach(figure => _console.WriteLine($"{availableFigureTypes.IndexOf(figure) + 1}. {figure}"));
-                do
-                {
-                    chosenFigureNumber = _consoleInput.GetInt("Please, enter figure's number:");
-                } while (chosenFigureNumber <= 0 || chosenFigureNumber > availableFigureTypes.Count);
-            }
+                chosenFigureNumber = _consoleInputProvider.GetInt("Please, enter figure's number:");
+            } while (chosenFigureNumber <= 0 || chosenFigureNumber > availableFigureTypes.Count);
 
             return availableFigureTypes[chosenFigureNumber - 1];
         }

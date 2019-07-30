@@ -6,6 +6,6 @@ namespace TicTacToe.Console.Interfaces
 {
     public interface IPlayersRegistrationService
     {
-        IPlayer Register(IList<FigureType> availableFigureTypes);
+        IPlayer Register(IReadOnlyList<FigureType> availableFigureTypes);
     }
 }
