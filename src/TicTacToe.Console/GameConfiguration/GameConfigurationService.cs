@@ -30,15 +30,15 @@ namespace TicTacToe.Console.GameConfiguration
 
 
         public IGameConfiguration PrepareGameConfiguration(
-            GameConfigurationType type = GameConfigurationType.WithNewPlayers,
+            ConfigurationCreationMode mode = ConfigurationCreationMode.NewPlayers,
             IGameConfiguration existentConfiguration = null)
         {
-            if (type == GameConfigurationType.WithSamePlayers && existentConfiguration == null)
+            if (mode == ConfigurationCreationMode.ExistingPlayers && existentConfiguration == null)
             {
-                throw new ArgumentNullException(nameof(existentConfiguration),"Existent configuration should not be null to create configuration with the same players");
+                throw new ArgumentNullException(nameof(existentConfiguration),
+                    "Existent configuration should not be null to create configuration with existing players");
             }
-
-            var players = type == GameConfigurationType.WithNewPlayers
+            var players = mode == ConfigurationCreationMode.NewPlayers
                 ? RegisterPlayers()
                 : existentConfiguration.Players;
             var firstPlayerIndex = GetFirstPlayerIndex(players);
@@ -47,17 +47,6 @@ namespace TicTacToe.Console.GameConfiguration
             return _gameConfigurationFactory.CreateGameConfiguration(players, firstPlayerIndex, boardSize);
         }
 
-
-        private int GetPlayersNumber(int max)
-        {
-            int playersNumber;
-            do
-            {
-                playersNumber = _consoleInputProvider.GetInt($"Please, enter the number of players (up to {max}):");
-            } while (playersNumber <= 1 || playersNumber > max);
-
-            return playersNumber;
-        }
 
         private IReadOnlyCollection<IPlayer> RegisterPlayers()
         {
@@ -73,6 +62,17 @@ namespace TicTacToe.Console.GameConfiguration
             }
 
             return players;
+        }
+
+        private int GetPlayersNumber(int max)
+        {
+            int playersNumber;
+            do
+            {
+                playersNumber = _consoleInputProvider.GetInt($"Please, enter the number of players (up to {max}):");
+            } while (playersNumber <= 1 || playersNumber > max);
+
+            return playersNumber;
         }
 
         private int GetFirstPlayerIndex(IReadOnlyCollection<IPlayer> players)

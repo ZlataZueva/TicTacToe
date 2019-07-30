@@ -37,7 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="GameConfiguration\GameConfigurationService.cs" />
-    <Compile Include="GameConfiguration\GameConfigurationType.cs" />
+    <Compile Include="GameConfiguration\ConfigurationCreationMode.cs" />
     <Compile Include="IO\Console.cs" />
     <Compile Include="IO\ConsoleInputProvider.cs" />
     <Compile Include="Interfaces\IConsole.cs" />
