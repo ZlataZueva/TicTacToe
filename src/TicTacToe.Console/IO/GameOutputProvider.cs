@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using iTechArt.TicTacToe.Foundation.Figures;
 using iTechArt.TicTacToe.Foundation.Interfaces;
 using TicTacToe.Console.Interfaces;
@@ -41,23 +42,12 @@ namespace TicTacToe.Console.IO
                                 throw new ArgumentOutOfRangeException();
                         }
                     }
-                    if (column != board.Size - 1)
-                    {
-                        _console.Write("│");
-                    }
+                    _console.Write(column != board.Size - 1? "│" : "");
                 }
                 _console.WriteLine();
                 if (row != board.Size - 1)
                 {
-                    for (var column = 0; column < board.Size; column++)
-                    {
-                        _console.Write("───");
-                        if (column != board.Size - 1)
-                        {
-                            _console.Write("┼");
-                        }
-                    }
-                    _console.WriteLine();
+                    _console.WriteLine(String.Concat(Enumerable.Repeat("───┼", board.Size - 1)) + "───");
                 }
             }
             _console.WriteLine();
