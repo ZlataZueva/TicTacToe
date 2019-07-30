@@ -18,7 +18,7 @@ namespace TicTacToe.Console.IO
 
         public void ShowBoard(IBoard board)
         {
-            _console.WriteLine("");
+            _console.WriteLine();
             for (var row = 0; row < board.Size; row++)
             {
                 for (var column = 0; column < board.Size; column++)
@@ -32,7 +32,7 @@ namespace TicTacToe.Console.IO
                         switch (board[row, column].Figure.Type)
                         {
                             case FigureType.Cross:
-                                _console.Write($" x ");
+                                _console.Write(" x ");
                                 break;
                             case FigureType.Circle:
                                 _console.Write(" o ");
@@ -46,21 +46,21 @@ namespace TicTacToe.Console.IO
                         _console.Write("│");
                     }
                 }
-                _console.WriteLine("");
+                _console.WriteLine();
                 if (row != board.Size - 1)
                 {
                     for (var column = 0; column < board.Size; column++)
                     {
-                        _console.Write($"───");
+                        _console.Write("───");
                         if (column != board.Size - 1)
                         {
                             _console.Write("┼");
                         }
                     }
-                    _console.WriteLine("");
+                    _console.WriteLine();
                 }
             }
-            _console.WriteLine("");
+            _console.WriteLine();
         }
     }
 }
