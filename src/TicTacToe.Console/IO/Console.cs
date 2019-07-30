@@ -15,7 +15,7 @@ namespace TicTacToe.Console.IO
             System.Console.Write(s);
         }
 
-        public void WriteLine(string s)
+        public void WriteLine(string s = "")
         {
             System.Console.WriteLine(s);
         }
