@@ -37,8 +37,7 @@ namespace TicTacToe.Console.IO
             bool parseResult;
             do
             {
-                var input = _console.ReadLine();
-                parseResult = Int32.TryParse(input, out number);
+                parseResult = Int32.TryParse(_console.ReadLine(), out number);
                 if (!parseResult)
                 {
                     _console.WriteLine("Please, enter a number");
