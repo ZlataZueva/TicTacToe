@@ -9,6 +9,7 @@ namespace TicTacToe.Console.IO
             System.Console.OutputEncoding = System.Text.Encoding.UTF8;
         }
 
+
         public void Write(string s)
         {
             System.Console.Write(s);
