@@ -15,8 +15,6 @@ namespace TicTacToe.Console.GameConfiguration
         private readonly IConsole _console;
         private readonly IConsoleInputProvider _consoleInputProvider;
 
-        private ICollection<IPlayer> _players;
-
 
         public GameConfigurationService(
             IGameConfigurationFactory gameConfigurationFactory, 
@@ -31,19 +29,22 @@ namespace TicTacToe.Console.GameConfiguration
         }
 
 
-        public IGameConfiguration PrepareGameConfiguration(GameConfigurationType type = GameConfigurationType.WithNewPlayers)
+        public IGameConfiguration PrepareGameConfiguration(
+            GameConfigurationType type = GameConfigurationType.WithNewPlayers,
+            IGameConfiguration existentConfiguration = null)
         {
-            if (type == GameConfigurationType.WithNewPlayers || !_players.Any())
+            if (type == GameConfigurationType.WithSamePlayers && existentConfiguration == null)
             {
-                _players = new List<IPlayer>();
-                var availableFigures = Enum.GetValues(typeof(FigureType)).Cast<FigureType>().ToList();
-                var playersNumber = GetPlayersNumber(availableFigures.Count);
-                _players = RegisterPlayers(playersNumber, availableFigures);
+                throw new ArgumentNullException(nameof(existentConfiguration),"Existent configuration should not be null to create configuration with the same players");
             }
-            var firstPlayerIndex = GetFirstPlayerIndex(_players);
+
+            var players = type == GameConfigurationType.WithNewPlayers
+                ? RegisterPlayers()
+                : existentConfiguration.Players;
+            var firstPlayerIndex = GetFirstPlayerIndex(players);
             var boardSize = GetBoardSize();
 
-            return _gameConfigurationFactory.CreateGameConfiguration(_players.ToList(), firstPlayerIndex - 1, boardSize);
+            return _gameConfigurationFactory.CreateGameConfiguration(players, firstPlayerIndex, boardSize);
         }
 
 
@@ -58,12 +59,14 @@ namespace TicTacToe.Console.GameConfiguration
             return playersNumber;
         }
 
-        private ICollection<IPlayer> RegisterPlayers(int count, ICollection<FigureType> availableFigures)
+        private IReadOnlyCollection<IPlayer> RegisterPlayers()
         {
+            var availableFigures = Enum.GetValues(typeof(FigureType)).Cast<FigureType>().ToList();
+            var playersNumber = GetPlayersNumber(availableFigures.Count);
             var players = new List<IPlayer>();
-            for (var n = 0; n < count; n++)
+            for (var n = 0; n < playersNumber; n++)
             {
-                var player = _playersRegistrationService.Register(availableFigures.ToList());
+                var player = _playersRegistrationService.Register(availableFigures);
                 players.Add(player);
                 _console.WriteLine($"Registered player: {player.FirstName} {player.LastName} with figure - {player.FigureType}");
                 availableFigures.Remove(player.FigureType);
@@ -72,7 +75,7 @@ namespace TicTacToe.Console.GameConfiguration
             return players;
         }
 
-        private int GetFirstPlayerIndex(ICollection<IPlayer> players)
+        private int GetFirstPlayerIndex(IReadOnlyCollection<IPlayer> players)
         {
             _console.WriteLine("Players:");
             players.ForEach((i, player) => _console.WriteLine($"{i + 1}. {player.FirstName} {player.LastName}"));
@@ -80,7 +83,7 @@ namespace TicTacToe.Console.GameConfiguration
             do
             {
                 firstPlayerNumber = _consoleInputProvider.GetInt("Please, choose who starts the game (enter player's number):");
-            } while (firstPlayerNumber <= 0 || firstPlayerNumber > _players.Count);
+            } while (firstPlayerNumber <= 0 || firstPlayerNumber > players.Count);
 
             return firstPlayerNumber - 1;
         }
