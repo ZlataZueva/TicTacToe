@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="Extensions\CollectionExtension.cs" />
     <Compile Include="GameConfiguration\GameConfigurationService.cs" />
+    <Compile Include="GameConfiguration\GameConfigurationType.cs" />
     <Compile Include="IO\Console.cs" />
     <Compile Include="IO\ConsoleInputProvider.cs" />
     <Compile Include="Interfaces\IConsole.cs" />

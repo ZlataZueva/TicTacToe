@@ -31,9 +31,9 @@ namespace TicTacToe.Console.GameConfiguration
         }
 
 
-        public IGameConfiguration GetGameConfiguration(bool withNewPlayers = true)
+        public IGameConfiguration GetGameConfiguration(GameConfigurationType type = GameConfigurationType.WithNewPlayers)
         {
-            if (withNewPlayers || !_players.Any())
+            if (type == GameConfigurationType.WithNewPlayers || !_players.Any())
             {
                 _players = new List<IPlayer>();
                 var availableFigures = Enum.GetValues(typeof(FigureType)).Cast<FigureType>().ToList();
