@@ -25,21 +25,24 @@ namespace iTechArt.TicTacToe
             _boardDrawer = new BoardDrawer(_console);
 
             var consoleInputProvider = new ConsoleInputProvider(_console);
-            var configurationService = new GameConfigurationService(
-                new GameConfigurationFactory(),
-                new PlayerRegistrationService(new PlayerFactory(), _console, consoleInputProvider),
-                _console,
-                consoleInputProvider);
-            var gameFactory = new GameFactory(
-                new BoardFactory(new CellFactory(), new FigureFactory()),
-                new WinningStatesFactory(), 
-                new GameInputProvider(consoleInputProvider, _console));
+            var gameConfigurationFactory = new GameConfigurationFactory();
+            var playerFactory = new PlayerFactory();
+            var playerRegistrationService = new PlayerRegistrationService(playerFactory, _console, consoleInputProvider);
+            var configurationService = new GameConfigurationService(gameConfigurationFactory, playerRegistrationService, _console, consoleInputProvider);
+            var cellFactory = new CellFactory();
+            var figureFactory = new FigureFactory();
+            var boardFactory = new BoardFactory(cellFactory, figureFactory);
+            var winningStatesFactory = new WinningStatesFactory();
+            var gameInputProvider = new GameInputProvider(consoleInputProvider, _console);
+            var gameFactory = new GameFactory(boardFactory, winningStatesFactory, gameInputProvider);
 
             var configuration = configurationService.CreateGameConfiguration();
             var game = gameFactory.CreateGame(configuration);
             game.StepCompleted += OnStepCompleted;
             game.GameFinished += OnGameFinished;
             game.Run();
+            game.StepCompleted -= OnStepCompleted;
+            game.GameFinished -= OnGameFinished;
         }
 
 
@@ -49,7 +52,6 @@ namespace iTechArt.TicTacToe
             switch (stepResult.Type)
             {
                 case StepResultType.Success:
-                    //_console.WriteLine("Step completed successfully");
                     _boardDrawer.ShowBoard(((SuccessfulStepResult)stepResult).Board);
                     break;
                 case StepResultType.NonexistentCell:
