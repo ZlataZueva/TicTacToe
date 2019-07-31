@@ -5,6 +5,7 @@ using iTechArt.TicTacToe.Foundation.Figures;
 using iTechArt.TicTacToe.Foundation.Game;
 using iTechArt.TicTacToe.Foundation.Game.GameResults;
 using iTechArt.TicTacToe.Foundation.Game.StepResults;
+using iTechArt.TicTacToe.Foundation.Interfaces;
 using iTechArt.TicTacToe.Foundation.WinningStates;
 using TicTacToe.Console.GameConfiguration;
 using TicTacToe.Console.Interfaces;
@@ -28,7 +29,8 @@ namespace iTechArt.TicTacToe
             var gameConfigurationFactory = new GameConfigurationFactory();
             var playerFactory = new PlayerFactory();
             var playerRegistrationService = new PlayerRegistrationService(playerFactory, _console, consoleInputProvider);
-            var configurationService = new GameConfigurationService(gameConfigurationFactory, playerRegistrationService, _console, consoleInputProvider);
+            var gameConfigurationService = new GameConfigurationService(
+                gameConfigurationFactory, playerRegistrationService, _console, consoleInputProvider);
             var cellFactory = new CellFactory();
             var figureFactory = new FigureFactory();
             var boardFactory = new BoardFactory(cellFactory, figureFactory);
@@ -36,13 +38,24 @@ namespace iTechArt.TicTacToe
             var gameInputProvider = new GameInputProvider(consoleInputProvider, _console);
             var gameFactory = new GameFactory(boardFactory, winningStatesFactory, gameInputProvider);
 
-            var configuration = configurationService.CreateGameConfiguration();
-            var game = gameFactory.CreateGame(configuration);
-            game.StepCompleted += OnStepCompleted;
-            game.GameFinished += OnGameFinished;
-            game.Run();
-            game.StepCompleted -= OnStepCompleted;
-            game.GameFinished -= OnGameFinished;
+            var chosenOptionNumber = 2;
+            IGameConfiguration gameConfiguration = null;
+            while(chosenOptionNumber != 3)
+            {
+                gameConfiguration = chosenOptionNumber == 1
+                    ? gameConfigurationService.CreateGameConfiguration(gameConfiguration)
+                    : gameConfigurationService.CreateGameConfiguration();
+                var game = gameFactory.CreateGame(gameConfiguration);
+                game.StepCompleted += OnStepCompleted;
+                game.GameFinished += OnGameFinished;
+                game.Run();
+                game.StepCompleted -= OnStepCompleted;
+                game.GameFinished -= OnGameFinished;
+                _console.WriteLine("1. Continue with the same players");
+                _console.WriteLine("2. Register new players");
+                _console.WriteLine("3. Exit");
+                chosenOptionNumber = consoleInputProvider.GetInt("Please, choose one of the options:");
+            }
         }
 
 
