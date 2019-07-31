@@ -29,16 +29,9 @@ namespace TicTacToe.Console.GameConfiguration
         }
 
 
-        public IGameConfiguration CreateGameConfiguration(
-            ConfigurationCreationMode mode = ConfigurationCreationMode.NewPlayers,
-            IGameConfiguration existingConfiguration = null)
+        public IGameConfiguration CreateGameConfiguration(IGameConfiguration existingConfiguration = null)
         {
-            if (mode == ConfigurationCreationMode.ExistingPlayers && existingConfiguration == null)
-            {
-                throw new ArgumentNullException(nameof(existingConfiguration),
-                    "Parameter should not be null to create configuration with existing players");
-            }
-            var players = mode == ConfigurationCreationMode.NewPlayers
+            var players = existingConfiguration == null
                 ? RegisterPlayers()
                 : existingConfiguration.Players;
             var firstPlayerIndex = GetFirstPlayerIndex(players);
