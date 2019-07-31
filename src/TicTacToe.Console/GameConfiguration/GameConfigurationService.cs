@@ -31,9 +31,7 @@ namespace TicTacToe.Console.GameConfiguration
 
         public IGameConfiguration CreateGameConfiguration(IGameConfiguration existingConfiguration = null)
         {
-            var players = existingConfiguration == null
-                ? RegisterPlayers()
-                : existingConfiguration.Players;
+            var players = existingConfiguration?.Players ?? RegisterPlayers();
             var firstPlayerIndex = GetFirstPlayerIndex(players);
             var boardSize = GetBoardSize();
 
