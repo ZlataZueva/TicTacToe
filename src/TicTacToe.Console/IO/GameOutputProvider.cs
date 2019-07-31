@@ -61,7 +61,7 @@ namespace TicTacToe.Console.IO
             {
                 case StepResultType.Success:
                     //_console.WriteLine("Step completed successfully");
-                    ShowBoard(((SuccessfulStepResult)stepResult).Board);
+                    ShowBoard(((SuccessfulStepResult) stepResult).Board);
                     break;
                 case StepResultType.NonexistentCell:
                     _console.WriteLine("Specified position doesn't exist");
@@ -73,13 +73,24 @@ namespace TicTacToe.Console.IO
                         $"Specified position is occupied by {occupier}");
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(stepResult.Type), stepResult.Type, "Unknown step result type");
+                    throw new ArgumentOutOfRangeException(nameof(stepResult.Type), stepResult.Type, "Unknown step result");
             }
         }
 
         public void ShowGameResult(GameResult gameResult)
         {
-            throw new NotImplementedException();
+            switch (gameResult.Type)
+            {
+                case GameResultType.Win:
+                    var winner = ((WinningGameResult) gameResult).Winner;
+                    _console.WriteLine($"{winner.FirstName} {winner.LastName} is the winner!");
+                    break;
+                case GameResultType.Draw:
+                    _console.WriteLine("Friendship won :)");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(gameResult.Type), gameResult.Type, "Unknown game result");
+            }
         }
     }
 }
