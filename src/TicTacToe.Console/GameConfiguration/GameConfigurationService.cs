@@ -29,18 +29,18 @@ namespace TicTacToe.Console.GameConfiguration
         }
 
 
-        public IGameConfiguration PrepareGameConfiguration(
+        public IGameConfiguration CreateGameConfiguration(
             ConfigurationCreationMode mode = ConfigurationCreationMode.NewPlayers,
-            IGameConfiguration existentConfiguration = null)
+            IGameConfiguration existingConfiguration = null)
         {
-            if (mode == ConfigurationCreationMode.ExistingPlayers && existentConfiguration == null)
+            if (mode == ConfigurationCreationMode.ExistingPlayers && existingConfiguration == null)
             {
-                throw new ArgumentNullException(nameof(existentConfiguration),
-                    "Existent configuration should not be null to create configuration with existing players");
+                throw new ArgumentNullException(nameof(existingConfiguration),
+                    "Parameter should not be null to create configuration with existing players");
             }
             var players = mode == ConfigurationCreationMode.NewPlayers
                 ? RegisterPlayers()
-                : existentConfiguration.Players;
+                : existingConfiguration.Players;
             var firstPlayerIndex = GetFirstPlayerIndex(players);
             var boardSize = GetBoardSize();
 
@@ -51,9 +51,9 @@ namespace TicTacToe.Console.GameConfiguration
         private IReadOnlyCollection<IPlayer> RegisterPlayers()
         {
             var availableFigures = Enum.GetValues(typeof(FigureType)).Cast<FigureType>().ToList();
-            var playersNumber = GetPlayersNumber(availableFigures.Count);
+            var numberOfPlayers = GetNumberOfPlayers(availableFigures.Count);
             var players = new List<IPlayer>();
-            for (var n = 0; n < playersNumber; n++)
+            for (var i = 0; i < numberOfPlayers; i++)
             {
                 var player = _playersRegistrationService.Register(availableFigures);
                 players.Add(player);
@@ -64,13 +64,13 @@ namespace TicTacToe.Console.GameConfiguration
             return players;
         }
 
-        private int GetPlayersNumber(int max)
+        private int GetNumberOfPlayers(int maxNumber)
         {
             int playersNumber;
             do
             {
-                playersNumber = _consoleInputProvider.GetInt($"Please, enter the number of players (up to {max}):");
-            } while (playersNumber <= 1 || playersNumber > max);
+                playersNumber = _consoleInputProvider.GetInt($"Please, enter the number of players (up to {maxNumber}):");
+            } while (playersNumber <= 1 || playersNumber > maxNumber);
 
             return playersNumber;
         }
