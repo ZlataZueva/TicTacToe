@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iTechArt.TicTacToe.Foundati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe.Console", "TicTacToe.Console\TicTacToe.Console.csproj", "{E5417F94-A785-4D09-92C5-D319FA9E0341}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "TicTacToe.Foundation\iTechArt.TicTacToe.Foundation\Common\Common.csproj", "{86BD6D6F-67B2-4FB4-8AD3-396AB618B742}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iTechArt.Common", "TicTacToe.Foundation\iTechArt.TicTacToe.Foundation\iTechArt.Common\iTechArt.Common.csproj", "{F0DB31B4-A07D-410E-BCB3-AE6694475D2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{E5417F94-A785-4D09-92C5-D319FA9E0341}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5417F94-A785-4D09-92C5-D319FA9E0341}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5417F94-A785-4D09-92C5-D319FA9E0341}.Release|Any CPU.Build.0 = Release|Any CPU
-		{86BD6D6F-67B2-4FB4-8AD3-396AB618B742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{86BD6D6F-67B2-4FB4-8AD3-396AB618B742}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{86BD6D6F-67B2-4FB4-8AD3-396AB618B742}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{86BD6D6F-67B2-4FB4-8AD3-396AB618B742}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0DB31B4-A07D-410E-BCB3-AE6694475D2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0DB31B4-A07D-410E-BCB3-AE6694475D2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0DB31B4-A07D-410E-BCB3-AE6694475D2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0DB31B4-A07D-410E-BCB3-AE6694475D2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
