@@ -6,21 +6,21 @@ namespace TicTacToe.Console.IO
     public class GameInputProvider : IGameInputProvider
     {
         private readonly IConsole _console;
-        private readonly IConsoleInputProvider _consoleInput;
+        private readonly IConsoleInputProvider _consoleInputProvider;
 
 
-        public GameInputProvider(IConsoleInputProvider consoleInput, IConsole console)
+        public GameInputProvider(IConsoleInputProvider consoleInputProvider, IConsole console)
         {
             _console = console;
-            _consoleInput = consoleInput;
+            _consoleInputProvider = consoleInputProvider;
         }
 
 
         public (int row, int column) GetPositionToMakeMove(IPlayer player)
         {
             _console.WriteLine($"{player.FirstName} {player.LastName}, please, choose where to put figure:");
-            var row = _consoleInput.GetInt("Row:") - 1;
-            var column = _consoleInput.GetInt("Column:") - 1;
+            var row = _consoleInputProvider.GetInt("Row:") - 1;
+            var column = _consoleInputProvider.GetInt("Column:") - 1;
 
             return (row, column);
         }
