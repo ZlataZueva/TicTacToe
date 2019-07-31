@@ -5,8 +5,8 @@ namespace TicTacToe.Console.Interfaces
 {
     public interface IGameConfigurationService
     {
-        IGameConfiguration PrepareGameConfiguration(
-            GameConfigurationType type = GameConfigurationType.WithNewPlayers,
-            IGameConfiguration existentConfiguration = null);
+        IGameConfiguration CreateGameConfiguration(
+            ConfigurationCreationMode mode = ConfigurationCreationMode.NewPlayers,
+            IGameConfiguration existingConfiguration = null);
     }
 }
