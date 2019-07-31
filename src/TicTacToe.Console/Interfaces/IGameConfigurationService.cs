@@ -1,5 +1,4 @@
 ﻿using iTechArt.TicTacToe.Foundation.Interfaces;
-using TicTacToe.Console.GameConfiguration;
 
 namespace TicTacToe.Console.Interfaces
 {
