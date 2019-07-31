@@ -42,11 +42,11 @@ namespace TicTacToe.Console.Players
             {
                 throw new ArgumentException("No more figures left");
             }
-            int chosenFigureNumber;
             if (availableFigureTypes.Count == 1)
             {
                 return availableFigureTypes.Single();
             }
+            int chosenFigureNumber;
             _console.WriteLine("Available figures:");
             availableFigureTypes.ForEach((i, figure) => _console.WriteLine($"{i + 1}. {figure}"));
             do
