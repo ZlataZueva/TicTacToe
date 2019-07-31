@@ -37,8 +37,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IGameOutputProvider.cs" />
+    <Compile Include="IO\GameInputProvider.cs" />
+    <Compile Include="IO\GameOutputProvider.cs" />
     <Compile Include="GameConfiguration\GameConfigurationService.cs" />
-    <Compile Include="GameConfiguration\ConfigurationCreationMode.cs" />
     <Compile Include="IO\Console.cs" />
     <Compile Include="IO\ConsoleInputProvider.cs" />
     <Compile Include="Interfaces\IConsole.cs" />
@@ -46,17 +47,15 @@
     <Compile Include="Interfaces\IGameConfigurationService.cs" />
     <Compile Include="Interfaces\IPlayerFactory.cs" />
     <Compile Include="Interfaces\IPlayersRegistrationService.cs" />
-    <Compile Include="IO\GameInputProvider.cs" />
-    <Compile Include="IO\GameOutputProvider.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Players\PlayerFactory.cs" />
     <Compile Include="Players\PlayerRegistrationService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\TicTacToe.Foundation\iTechArt.TicTacToe.Foundation\Common\Common.csproj">
-      <Project>{86bd6d6f-67b2-4fb4-8ad3-396ab618b742}</Project>
-      <Name>Common</Name>
+    <ProjectReference Include="..\TicTacToe.Foundation\iTechArt.TicTacToe.Foundation\iTechArt.Common\iTechArt.Common.csproj">
+      <Project>{f0db31b4-a07d-410e-bcb3-ae6694475d2e}</Project>
+      <Name>iTechArt.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\TicTacToe.Foundation\iTechArt.TicTacToe.Foundation\iTechArt.TicTacToe.Foundation.csproj">
       <Project>{66864c87-6833-4e11-ac02-8ae46bedc999}</Project>

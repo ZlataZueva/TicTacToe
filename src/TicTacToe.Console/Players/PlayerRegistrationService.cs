@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using iTechArt.TicTacToe.Foundation.Figures;
 using iTechArt.TicTacToe.Foundation.Interfaces;
-using Common.Extensions;
+using iTechArt.Common.Extensions;
 using TicTacToe.Console.Interfaces;
 
 namespace TicTacToe.Console.Players

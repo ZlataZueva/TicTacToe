@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using iTechArt.TicTacToe.Foundation.Figures;
 using iTechArt.TicTacToe.Foundation.Interfaces;
-using Common.Extensions;
+using iTechArt.Common.Extensions;
 using TicTacToe.Console.Interfaces;
 
 namespace TicTacToe.Console.GameConfiguration
@@ -29,18 +29,9 @@ namespace TicTacToe.Console.GameConfiguration
         }
 
 
-        public IGameConfiguration CreateGameConfiguration(
-            ConfigurationCreationMode mode = ConfigurationCreationMode.NewPlayers,
-            IGameConfiguration existingConfiguration = null)
+        public IGameConfiguration CreateGameConfiguration(IGameConfiguration existingConfiguration = null)
         {
-            if (mode == ConfigurationCreationMode.ExistingPlayers && existingConfiguration == null)
-            {
-                throw new ArgumentNullException(nameof(existingConfiguration),
-                    "Parameter should not be null to create configuration with existing players");
-            }
-            var players = mode == ConfigurationCreationMode.NewPlayers
-                ? RegisterPlayers()
-                : existingConfiguration.Players;
+            var players = existingConfiguration?.Players ?? RegisterPlayers();
             var firstPlayerIndex = GetFirstPlayerIndex(players);
             var boardSize = GetBoardSize();
 
