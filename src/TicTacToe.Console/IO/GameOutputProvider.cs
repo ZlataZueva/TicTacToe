@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using iTechArt.TicTacToe.Foundation.Figures;
+using iTechArt.TicTacToe.Foundation.Game.GameResults;
+using iTechArt.TicTacToe.Foundation.Game.StepResults;
 using iTechArt.TicTacToe.Foundation.Interfaces;
 using TicTacToe.Console.Interfaces;
 
@@ -51,6 +53,33 @@ namespace TicTacToe.Console.IO
                 }
             }
             _console.WriteLine();
+        }
+
+        public void ShowStepResult(StepResult stepResult)
+        {
+            switch (stepResult.Type)
+            {
+                case StepResultType.Success:
+                    //_console.WriteLine("Step completed successfully");
+                    ShowBoard(((SuccessfulStepResult)stepResult).Board);
+                    break;
+                case StepResultType.NonexistentCell:
+                    _console.WriteLine("Specified position doesn't exist");
+                    break;
+                case StepResultType.OccupiedCell:
+                    var cell = ((OccupiedCellStepResult) stepResult).Cell;
+                    var occupier = cell.IsEmpty? "nobody" : $"{cell.Figure.Type}";
+                    _console.WriteLine(
+                        $"Specified position is occupied by {occupier}");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(stepResult.Type), stepResult.Type, "Unknown step result type");
+            }
+        }
+
+        public void ShowGameResult(GameResult gameResult)
+        {
+            throw new NotImplementedException();
         }
     }
 }
