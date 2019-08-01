@@ -1,9 +1,9 @@
 ﻿using System;
+using iTechArt.TicTacToe.Console.Interfaces;
 using iTechArt.TicTacToe.Foundation.Figures;
 using iTechArt.TicTacToe.Foundation.Interfaces;
-using TicTacToe.Console.Interfaces;
 
-namespace TicTacToe.Console.Players
+namespace iTechArt.TicTacToe.Console.Players
 {
     public class PlayerFactory : IPlayerFactory
     {

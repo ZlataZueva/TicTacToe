@@ -50,9 +50,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TicTacToe.Console\TicTacToe.Console.csproj">
+    <ProjectReference Include="..\TicTacToe.Console\iTechArt.TicTacToe.Console.csproj">
       <Project>{e5417f94-a785-4d09-92c5-d319fa9e0341}</Project>
-      <Name>TicTacToe.Console</Name>
+      <Name>iTechArt.TicTacToe.Console</Name>
     </ProjectReference>
     <ProjectReference Include="..\TicTacToe.Foundation\iTechArt.TicTacToe.Foundation\iTechArt.TicTacToe.Foundation.csproj">
       <Project>{66864c87-6833-4e11-ac02-8ae46bedc999}</Project>

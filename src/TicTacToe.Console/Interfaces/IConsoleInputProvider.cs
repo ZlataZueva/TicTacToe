@@ -1,4 +1,4 @@
-﻿namespace TicTacToe.Console.Interfaces
+﻿namespace iTechArt.TicTacToe.Console.Interfaces
 {
     public interface IConsoleInputProvider
     {

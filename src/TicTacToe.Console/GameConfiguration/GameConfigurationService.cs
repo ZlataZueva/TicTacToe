@@ -4,9 +4,9 @@ using System.Linq;
 using iTechArt.TicTacToe.Foundation.Figures;
 using iTechArt.TicTacToe.Foundation.Interfaces;
 using iTechArt.Common.Extensions;
-using TicTacToe.Console.Interfaces;
+using iTechArt.TicTacToe.Console.Interfaces;
 
-namespace TicTacToe.Console.GameConfiguration
+namespace iTechArt.TicTacToe.Console.GameConfiguration
 {
     public class GameConfigurationService : IGameConfigurationService
     {

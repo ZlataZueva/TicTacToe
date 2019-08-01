@@ -1,6 +1,6 @@
-﻿using TicTacToe.Console.Interfaces;
+﻿using iTechArt.TicTacToe.Console.Interfaces;
 
-namespace TicTacToe.Console.IO
+namespace iTechArt.TicTacToe.Console.IO
 {
     public class Console : IConsole
     {
