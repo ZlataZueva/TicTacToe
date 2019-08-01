@@ -8,13 +8,13 @@ namespace iTechArt.TicTacToe.Console.Drawers
         protected IConsole Console;
 
 
-        public FigureType Type { get; }
+        public FigureType FigureType { get; }
 
 
-        protected FigureDrawer(FigureType type, IConsole console)
+        protected FigureDrawer(FigureType figureType, IConsole console)
         {
             Console = console;
-            Type = type;
+            FigureType = figureType;
         }
 
 
