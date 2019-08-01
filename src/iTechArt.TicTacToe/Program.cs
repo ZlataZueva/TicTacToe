@@ -1,4 +1,9 @@
 ﻿using System;
+using iTechArt.TicTacToe.Console.Drawers;
+using iTechArt.TicTacToe.Console.GameConfiguration;
+using iTechArt.TicTacToe.Console.Interfaces;
+using iTechArt.TicTacToe.Console.IO;
+using iTechArt.TicTacToe.Console.Players;
 using iTechArt.TicTacToe.Foundation.Board;
 using iTechArt.TicTacToe.Foundation.Cell;
 using iTechArt.TicTacToe.Foundation.Figures;
@@ -7,11 +12,7 @@ using iTechArt.TicTacToe.Foundation.Game.GameResults;
 using iTechArt.TicTacToe.Foundation.Game.StepResults;
 using iTechArt.TicTacToe.Foundation.Interfaces;
 using iTechArt.TicTacToe.Foundation.WinningStates;
-using TicTacToe.Console.GameConfiguration;
-using TicTacToe.Console.Interfaces;
-using TicTacToe.Console.IO;
-using TicTacToe.Console.Players;
-using Console = TicTacToe.Console.IO.Console;
+using GameConsole = iTechArt.TicTacToe.Console.IO.Console;
 
 namespace iTechArt.TicTacToe
 {
@@ -23,8 +24,10 @@ namespace iTechArt.TicTacToe
 
         public static void Main(string[] args)
         {
-            _console = new Console();
-            _boardDrawer = new BoardDrawer(_console);
+            _console = new GameConsole();
+            var figureDrawerFactory = new FigureDrawerFactory(_console);
+            var boardDrawerFactory = new BoardDrawerFactory(_console, figureDrawerFactory);
+            _boardDrawer = boardDrawerFactory.CreateBoardDrawer();
 
             var consoleInputProvider = new ConsoleInputProvider(_console);
             var gameConfigurationFactory = new GameConfigurationFactory();
@@ -55,7 +58,10 @@ namespace iTechArt.TicTacToe
                 _console.WriteLine("1. Continue with the same players");
                 _console.WriteLine("2. Register new players");
                 _console.WriteLine("3. Exit");
-                chosenOptionNumber = consoleInputProvider.GetInt("Please, choose one of the options:");
+                do
+                {
+                    chosenOptionNumber = consoleInputProvider.GetInt("Please, choose one of the options:");
+                } while (chosenOptionNumber <= 0 || chosenOptionNumber > 3);
             }
         }
 
