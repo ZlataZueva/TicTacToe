@@ -38,7 +38,7 @@
   <ItemGroup>
     <Compile Include="Interfaces\IBoardDrawer.cs" />
     <Compile Include="IO\GameInputProvider.cs" />
-    <Compile Include="IO\BoardDrawer.cs" />
+    <Compile Include="Drawers\BoardDrawer.cs" />
     <Compile Include="GameConfiguration\GameConfigurationService.cs" />
     <Compile Include="IO\Console.cs" />
     <Compile Include="IO\ConsoleInputProvider.cs" />
