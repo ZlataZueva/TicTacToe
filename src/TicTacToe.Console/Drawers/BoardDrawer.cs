@@ -22,11 +22,11 @@ namespace iTechArt.TicTacToe.Console.Drawers
 
         public void DrawBoard(IBoard board)
         {
-            DrawBorder(-1, board.Size);
+            DrawRowBorder(-1, board.Size);
             foreach (var row in Enumerable.Range(0, board.Size))
             {
                 DrawRow(board.Where(c => c.Row == row));
-                DrawBorder(row, board.Size);
+                DrawRowBorder(row, board.Size);
             }
         }
 
@@ -49,7 +49,7 @@ namespace iTechArt.TicTacToe.Console.Drawers
             _console.WriteLine();
         }
 
-        private void DrawBorder(int row, int boardSize)
+        private void DrawRowBorder(int row, int boardSize)
         {
             if (row == -1)
             {
