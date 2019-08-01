@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
+using iTechArt.TicTacToe.Console.Interfaces;
 using iTechArt.TicTacToe.Foundation.Figures;
 using iTechArt.TicTacToe.Foundation.Interfaces;
-using TicTacToe.Console.Interfaces;
 
-namespace TicTacToe.Console.IO
+namespace iTechArt.TicTacToe.Console.IO
 {
     public class BoardDrawer : IBoardDrawer
     {

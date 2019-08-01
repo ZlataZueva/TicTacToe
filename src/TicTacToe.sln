@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iTechArt.TicTacToe", "iTech
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iTechArt.TicTacToe.Foundation", "TicTacToe.Foundation\iTechArt.TicTacToe.Foundation\iTechArt.TicTacToe.Foundation.csproj", "{66864C87-6833-4E11-AC02-8AE46BEDC999}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe.Console", "TicTacToe.Console\TicTacToe.Console.csproj", "{E5417F94-A785-4D09-92C5-D319FA9E0341}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iTechArt.TicTacToe.Console", "TicTacToe.Console\iTechArt.TicTacToe.Console.csproj", "{E5417F94-A785-4D09-92C5-D319FA9E0341}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iTechArt.Common", "TicTacToe.Foundation\iTechArt.TicTacToe.Foundation\iTechArt.Common\iTechArt.Common.csproj", "{F0DB31B4-A07D-410E-BCB3-AE6694475D2E}"
 EndProject
