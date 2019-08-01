@@ -66,7 +66,7 @@ namespace iTechArt.TicTacToe
             switch (stepResult.Type)
             {
                 case StepResultType.Success:
-                    _boardDrawer.ShowBoard(((SuccessfulStepResult)stepResult).Board);
+                    _boardDrawer.DrawBoard(((SuccessfulStepResult)stepResult).Board);
                     break;
                 case StepResultType.NonexistentCell:
                     _console.WriteLine("Specified position doesn't exist");

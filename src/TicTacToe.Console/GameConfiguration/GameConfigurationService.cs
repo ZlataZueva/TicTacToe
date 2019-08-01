@@ -86,7 +86,7 @@ namespace TicTacToe.Console.GameConfiguration
             do
             {
                 boardSize = _consoleInputProvider.GetInt("Please, enter the size of the board:");
-            } while (boardSize <= 0);
+            } while (boardSize <= 2);
 
             return boardSize;
         }
