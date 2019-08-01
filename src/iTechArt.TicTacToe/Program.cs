@@ -73,8 +73,7 @@ namespace iTechArt.TicTacToe
                     break;
                 case StepResultType.OccupiedCell:
                     var occupier = ((OccupiedCellStepResult)stepResult).Cell.Figure.Type;
-                    _console.WriteLine(
-                        $"Specified position is occupied by {occupier}");
+                    _console.WriteLine($"Specified position is occupied by {occupier}");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(stepResult.Type), stepResult.Type, "Unknown step result");
