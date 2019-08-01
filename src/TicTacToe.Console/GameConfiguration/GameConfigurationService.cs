@@ -46,6 +46,7 @@ namespace TicTacToe.Console.GameConfiguration
             var players = new List<IPlayer>();
             for (var i = 0; i < numberOfPlayers; i++)
             {
+                _console.WriteLine($"Player {i + 1}:");
                 var player = _playersRegistrationService.Register(availableFigures);
                 players.Add(player);
                 _console.WriteLine($"Registered player: {player.FirstName} {player.LastName} with figure - {player.FigureType}");

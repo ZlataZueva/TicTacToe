@@ -20,6 +20,7 @@ namespace iTechArt.TicTacToe
         private static IConsole _console;
         private static IBoardDrawer _boardDrawer;
 
+
         public static void Main(string[] args)
         {
             _console = new Console();
@@ -71,8 +72,7 @@ namespace iTechArt.TicTacToe
                     _console.WriteLine("Specified position doesn't exist");
                     break;
                 case StepResultType.OccupiedCell:
-                    var cell = ((OccupiedCellStepResult)stepResult).Cell;
-                    var occupier = cell.IsEmpty ? "nobody" : $"{cell.Figure.Type}";
+                    var occupier = ((OccupiedCellStepResult)stepResult).Cell.Figure.Type;
                     _console.WriteLine(
                         $"Specified position is occupied by {occupier}");
                     break;
