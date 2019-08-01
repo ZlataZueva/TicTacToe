@@ -72,14 +72,16 @@ namespace iTechArt.TicTacToe
             switch (stepResult.Type)
             {
                 case StepResultType.Success:
-                    _boardDrawer.DrawBoard(((SuccessfulStepResult)stepResult).Board);
+                    var successfulResult = (SuccessfulStepResult)stepResult;
+                    _boardDrawer.DrawBoard(successfulResult.Board);
                     break;
                 case StepResultType.NonexistentCell:
                     _console.WriteLine("Specified position doesn't exist");
                     break;
                 case StepResultType.OccupiedCell:
-                    var occupier = ((OccupiedCellStepResult)stepResult).Cell.Figure.Type;
-                    _console.WriteLine($"Specified position is occupied by {occupier}");
+                    var occupiedCellResult = (OccupiedCellStepResult) stepResult;
+                    _console.WriteLine(
+                        $"Specified position is occupied by { occupiedCellResult.Cell.Figure.Type}");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(stepResult.Type), stepResult.Type, "Unknown step result");
@@ -92,8 +94,8 @@ namespace iTechArt.TicTacToe
             switch (gameResult.Type)
             {
                 case GameResultType.Win:
-                    var winner = ((WinningGameResult)gameResult).Winner;
-                    _console.WriteLine($"{winner.FirstName} {winner.LastName} is the winner!");
+                    var winningResult = (WinningGameResult) gameResult;
+                    _console.WriteLine($"{winningResult.Winner.FirstName} {winningResult.Winner.LastName} is the winner!");
                     break;
                 case GameResultType.Draw:
                     _console.WriteLine("Friendship won :)");
