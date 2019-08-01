@@ -17,7 +17,7 @@ namespace TicTacToe.Console.IO
         }
 
 
-        public void ShowBoard(IBoard board)
+        public void DrawBoard(IBoard board)
         {
             _console.WriteLine();
             for (var row = 0; row < board.Size; row++)
