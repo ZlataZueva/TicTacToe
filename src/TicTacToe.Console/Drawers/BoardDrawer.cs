@@ -10,11 +10,13 @@ namespace iTechArt.TicTacToe.Console.Drawers
     public class BoardDrawer : IBoardDrawer
     {
         private readonly IConsole _console;
+        private readonly IDictionary<FigureType, IFigureDrawer> _figureDrawersDictionary;
 
 
-        public BoardDrawer(IConsole console)
+        public BoardDrawer(IConsole console, IFigureDrawerFactory figureDrawerFactory)
         {
             _console = console;
+            _figureDrawersDictionary = Enum.GetValues(typeof(FigureType)).Cast<FigureType>().ToDictionary(f => f, figureDrawerFactory.CreateFigureDrawer);
         }
 
 
@@ -40,17 +42,7 @@ namespace iTechArt.TicTacToe.Console.Drawers
                 }
                 else
                 {
-                    switch (cell.Figure.Type)
-                    {
-                        case FigureType.Cross:
-                            _console.Write(" x ");
-                            break;
-                        case FigureType.Circle:
-                            _console.Write(" o ");
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
+                    _figureDrawersDictionary[cell.Figure.Type].DrawFigure();
                 }
                 _console.Write("│");
             }
