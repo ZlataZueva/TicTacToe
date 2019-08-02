@@ -18,7 +18,7 @@ namespace iTechArt.TicTacToe.Console.Drawers
         {
             if (figure.Type != FigureType.Cross)
             {
-                throw new ArgumentException($"Figure type should be Cross");
+                throw new ArgumentException("Figure type should be Cross");
             }
             Console.Write(" x ");
         }
