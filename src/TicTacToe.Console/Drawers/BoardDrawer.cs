@@ -42,7 +42,7 @@ namespace iTechArt.TicTacToe.Console.Drawers
                 }
                 else
                 {
-                    _figureDrawersDictionary[cell.Figure.Type].DrawFigure();
+                    _figureDrawersDictionary[cell.Figure.Type].DrawFigure(cell.Figure);
                 }
                 _console.Write("│");
             }
