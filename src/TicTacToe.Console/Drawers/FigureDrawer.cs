@@ -10,7 +10,7 @@ namespace iTechArt.TicTacToe.Console.Drawers
         private readonly FigureType _figureType;
 
 
-        protected IConsole Console;
+        protected IConsole Console { get; }
 
 
         protected FigureDrawer(FigureType figureType, IConsole console)
