@@ -1,5 +1,5 @@
 ﻿using iTechArt.TicTacToe.Console.Interfaces;
-using iTechArt.TicTacToe.Foundation.Figures;
+using iTechArt.TicTacToe.Foundation.Interfaces;
 
 namespace iTechArt.TicTacToe.Console.Drawers
 {
@@ -8,16 +8,12 @@ namespace iTechArt.TicTacToe.Console.Drawers
         protected IConsole Console;
 
 
-        public FigureType FigureType { get; }
-
-
-        protected FigureDrawer(FigureType figureType, IConsole console)
+        protected FigureDrawer(IConsole console)
         {
             Console = console;
-            FigureType = figureType;
         }
 
 
-        public abstract void DrawFigure();
+        public abstract void DrawFigure(IFigure figure);
     }
 }

@@ -26,8 +26,8 @@ namespace iTechArt.TicTacToe
         {
             _console = new GameConsole();
             var figureDrawerFactory = new FigureDrawerFactory(_console);
-            var boardDrawerFactory = new BoardDrawerFactory(_console, figureDrawerFactory);
-            _boardDrawer = boardDrawerFactory.CreateBoardDrawer();
+            var figureDrawerProvider = new FigureDrawerProvider(figureDrawerFactory);
+            _boardDrawer = new BoardDrawer(_console, figureDrawerProvider);
 
             var consoleInputProvider = new ConsoleInputProvider(_console);
             var gameConfigurationFactory = new GameConfigurationFactory();

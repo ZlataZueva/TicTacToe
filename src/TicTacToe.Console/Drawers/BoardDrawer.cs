@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using iTechArt.TicTacToe.Console.Interfaces;
-using iTechArt.TicTacToe.Foundation.Figures;
 using iTechArt.TicTacToe.Foundation.Interfaces;
 
 namespace iTechArt.TicTacToe.Console.Drawers
@@ -10,28 +9,28 @@ namespace iTechArt.TicTacToe.Console.Drawers
     public class BoardDrawer : IBoardDrawer
     {
         private readonly IConsole _console;
-        private readonly IDictionary<FigureType, IFigureDrawer> _figureDrawersDictionary;
+        private readonly IFigureDrawerProvider _figureDrawerProvider;
 
 
-        public BoardDrawer(IConsole console, IFigureDrawerFactory figureDrawerFactory)
+        public BoardDrawer(IConsole console, IFigureDrawerProvider figureDrawerProvider)
         {
             _console = console;
-            _figureDrawersDictionary = Enum.GetValues(typeof(FigureType)).Cast<FigureType>().ToDictionary(f => f, figureDrawerFactory.CreateFigureDrawer);
+            _figureDrawerProvider = figureDrawerProvider;
         }
 
 
         public void DrawBoard(IBoard board)
         {
-            DrawBorder(-1, board.Size);
-            foreach (var row in Enumerable.Range(0, board.Size))
+            DrawRowBorder(-1, board.Size);
+            foreach (var row in board.GroupBy(c => c.Row))
             {
-                DrawRow(board.Where(c => c.Row == row));
-                DrawBorder(row, board.Size);
+                DrawRow(row.ToList());
+                DrawRowBorder(row.Key, board.Size);
             }
         }
 
 
-        private void DrawRow(IEnumerable<ICell> row)
+        private void DrawRow(IReadOnlyCollection<ICell> row)
         {
             _console.Write("│");
             foreach (var cell in row)
@@ -42,14 +41,14 @@ namespace iTechArt.TicTacToe.Console.Drawers
                 }
                 else
                 {
-                    _figureDrawersDictionary[cell.Figure.Type].DrawFigure();
+                    _figureDrawerProvider.GetFigureDrawer(cell.Figure.Type).DrawFigure(cell.Figure);
                 }
                 _console.Write("│");
             }
             _console.WriteLine();
         }
 
-        private void DrawBorder(int row, int boardSize)
+        private void DrawRowBorder(int row, int boardSize)
         {
             if (row == -1)
             {

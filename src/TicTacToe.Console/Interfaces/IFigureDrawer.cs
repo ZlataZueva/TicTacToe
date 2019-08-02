@@ -1,7 +1,9 @@
-﻿namespace iTechArt.TicTacToe.Console.Interfaces
+﻿using iTechArt.TicTacToe.Foundation.Interfaces;
+
+namespace iTechArt.TicTacToe.Console.Interfaces
 {
     public interface IFigureDrawer
     {
-        void DrawFigure();
+        void DrawFigure(IFigure figure);
     }
 }

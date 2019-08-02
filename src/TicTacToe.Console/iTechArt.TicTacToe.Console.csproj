@@ -36,15 +36,15 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Drawers\BoardDrawerFactory.cs" />
     <Compile Include="Drawers\CircleDrawer.cs" />
     <Compile Include="Drawers\CrossDrawer.cs" />
     <Compile Include="Drawers\FigureDrawer.cs" />
     <Compile Include="Drawers\FigureDrawerFactory.cs" />
+    <Compile Include="Drawers\FigureDrawerProvider.cs" />
     <Compile Include="Interfaces\IBoardDrawer.cs" />
-    <Compile Include="Interfaces\IBoardDrawerFactory.cs" />
     <Compile Include="Interfaces\IFigureDrawer.cs" />
     <Compile Include="Interfaces\IFigureDrawerFactory.cs" />
+    <Compile Include="Interfaces\IFigureDrawerProvider.cs" />
     <Compile Include="IO\GameInputProvider.cs" />
     <Compile Include="Drawers\BoardDrawer.cs" />
     <Compile Include="GameConfiguration\GameConfigurationService.cs" />
