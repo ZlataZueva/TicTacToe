@@ -23,15 +23,15 @@ namespace iTechArt.TicTacToe.Console.Drawers
         public void DrawBoard(IBoard board)
         {
             DrawRowBorder(-1, board.Size);
-            foreach (var row in Enumerable.Range(0, board.Size))
+            foreach (var row in board.GroupBy(c => c.Row))
             {
-                DrawRow(board.Where(c => c.Row == row));
-                DrawRowBorder(row, board.Size);
+                DrawRow(row.ToList());
+                DrawRowBorder(row.Key, board.Size);
             }
         }
 
 
-        private void DrawRow(IEnumerable<ICell> row)
+        private void DrawRow(IReadOnlyCollection<ICell> row)
         {
             _console.Write("│");
             foreach (var cell in row)
