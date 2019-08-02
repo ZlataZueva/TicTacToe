@@ -10,13 +10,13 @@ namespace iTechArt.TicTacToe.Console.Drawers
     public class BoardDrawer : IBoardDrawer
     {
         private readonly IConsole _console;
-        private readonly IDictionary<FigureType, IFigureDrawer> _figureDrawersDictionary;
+        private readonly IFigureDrawerProvider _figureDrawerProvider;
 
 
-        public BoardDrawer(IConsole console, IFigureDrawerFactory figureDrawerFactory)
+        public BoardDrawer(IConsole console, IFigureDrawerProvider figureDrawerProvider)
         {
             _console = console;
-            _figureDrawersDictionary = Enum.GetValues(typeof(FigureType)).Cast<FigureType>().ToDictionary(f => f, figureDrawerFactory.CreateFigureDrawer);
+            _figureDrawerProvider = figureDrawerProvider;
         }
 
 
@@ -42,7 +42,7 @@ namespace iTechArt.TicTacToe.Console.Drawers
                 }
                 else
                 {
-                    _figureDrawersDictionary[cell.Figure.Type].DrawFigure(cell.Figure);
+                    _figureDrawerProvider.GetFigureDrawer(cell.Figure.Type).DrawFigure(cell.Figure);
                 }
                 _console.Write("│");
             }
