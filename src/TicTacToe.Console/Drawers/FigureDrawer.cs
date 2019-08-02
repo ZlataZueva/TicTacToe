@@ -16,6 +16,7 @@ namespace iTechArt.TicTacToe.Console.Drawers
         protected FigureDrawer(FigureType figureType, IConsole console)
         {
             _figureType = figureType;
+
             Console = console;
         }
 
