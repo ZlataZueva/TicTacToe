@@ -1,7 +1,7 @@
 ﻿using iTechArt.TicTacToe.Foundation.Figures;
 using iTechArt.TicTacToe.Foundation.Interfaces;
 
-namespace TicTacToe.Console.Players
+namespace iTechArt.TicTacToe.Console.Players
 {
     public class Player : IPlayer
     {

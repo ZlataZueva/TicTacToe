@@ -1,7 +1,7 @@
 ﻿using iTechArt.TicTacToe.Foundation.Figures;
 using iTechArt.TicTacToe.Foundation.Interfaces;
 
-namespace TicTacToe.Console.Interfaces
+namespace iTechArt.TicTacToe.Console.Interfaces
 {
     public interface IPlayerFactory
     {

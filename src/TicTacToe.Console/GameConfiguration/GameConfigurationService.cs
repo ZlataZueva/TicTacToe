@@ -4,9 +4,9 @@ using System.Linq;
 using iTechArt.TicTacToe.Foundation.Figures;
 using iTechArt.TicTacToe.Foundation.Interfaces;
 using iTechArt.Common.Extensions;
-using TicTacToe.Console.Interfaces;
+using iTechArt.TicTacToe.Console.Interfaces;
 
-namespace TicTacToe.Console.GameConfiguration
+namespace iTechArt.TicTacToe.Console.GameConfiguration
 {
     public class GameConfigurationService : IGameConfigurationService
     {
@@ -46,6 +46,7 @@ namespace TicTacToe.Console.GameConfiguration
             var players = new List<IPlayer>();
             for (var i = 0; i < numberOfPlayers; i++)
             {
+                _console.WriteLine($"Player {i + 1}:");
                 var player = _playersRegistrationService.Register(availableFigures);
                 players.Add(player);
                 _console.WriteLine($"Registered player: {player.FirstName} {player.LastName} with figure - {player.FigureType}");
@@ -85,7 +86,7 @@ namespace TicTacToe.Console.GameConfiguration
             do
             {
                 boardSize = _consoleInputProvider.GetInt("Please, enter the size of the board:");
-            } while (boardSize <= 0);
+            } while (boardSize <= 2);
 
             return boardSize;
         }
